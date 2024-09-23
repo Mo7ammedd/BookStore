@@ -81,6 +81,3 @@ environment:
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
----
-
-This README is designed to provide quick instructions and a professional overview of the project with Docker integration. You can add more customization or details as needed!
