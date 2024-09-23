@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Product>
+
+<div class="row pb-3 product-list-row">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-sm-6 product-col">
+            <div class="row p-2 product-card-wrapper">
+                <div class="col-12 p-1">
+                    <div class="card border-0 p-3 shadow product-card rounded h-100"> <!-- Ensures the card takes full height -->
+                        <img src="@product.ImageUrl" class="card-img-top product-image rounded" />
+                        <div class="card-body pb-0 product-card-body">
+                            <div class="pl-1 product-title-wrapper">
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center product-title">@product.Title</p>
+                                <p class="card-title text-warning text-center product-author">by <b>@product.Author</b></p>
+                            </div>
+                            <div class="pl-1 product-pricing-wrapper">
+                                <p class="text-dark text-opacity-75 text-center mb-0 product-list-price">
+                                    List Price:
+                                    <span class="text-decoration-line-through">
+                                        @product.ListPrice.ToString("c")
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="pl-1 product-lowest-price-wrapper">
+                                <p class="text-dark text-opacity-75 text-center product-lowest-price">As low as:
+                                    <span>
+                                        @product.Price100.ToString("c")
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="product-details-btn-wrapper">
+                            <a asp-action="Details"
+                               asp-route-productId="@product.Id"
+                               class="btn btn-primary bg-gradient border-0 form-control product-details-btn">
+                                Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
