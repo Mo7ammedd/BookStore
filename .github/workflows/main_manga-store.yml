@@ -58,7 +58,7 @@ jobs:
         with:
           app-name: 'Manga-Store'
           slot-name: 'Production'
-          package: ${{github.workspace}}/myapp
+          package: .
 
       - name: Configure app settings for Azure Web App
         run: |
