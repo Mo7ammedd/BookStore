@@ -112,7 +112,7 @@ namespace BookStore.Web.Areas.Customer.Controllers {
 
 			if (applicationUser.CompanyId.GetValueOrDefault() == 0) {
 				
-                var domain = "http://localhost:5064/";
+                var domain = "https://manga-store.azurewebsites.net/";
                 var options = new SessionCreateOptions {
                     SuccessUrl = domain+ $"customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
                     CancelUrl = domain+"customer/cart/index",
