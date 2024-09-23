@@ -61,10 +61,11 @@ jobs:
           package: .
 
       - name: Configure app settings for Azure Web App
+        shell: bash
         run: |
           az webapp config appsettings set --name Manga-Store --resource-group Manga_Store --settings \
-          ConnectionStrings__DefaultConnection="Server=tcp:manga-store.database.windows.net,1433;Initial Catalog=Manga;Persist Security Info=False;User ID=sqladmin;Password=${{ secrets.AZURE_SQL_PASSWORD }};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" \
-          Stripe__PublishableKey="${{ secrets.STRIPE_PUBLISHABLE_KEY }}" \
-          Stripe__SecretKey="${{ secrets.STRIPE_SECRET_KEY }}" \
-          ExternalAuthentication__Facebook__AppId="${{ secrets.FACEBOOK_APP_ID }}" \
-          ExternalAuthentication__Facebook__AppSecret="${{ secrets.FACEBOOK_APP_SECRET }}"
+          "ConnectionStrings__DefaultConnection=Server=tcp:manga-store.database.windows.net,1433;Initial Catalog=Manga;Persist Security Info=False;User ID=sqladmin;Password=${{ secrets.AZURE_SQL_PASSWORD }};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" \
+          "Stripe__PublishableKey=${{ secrets.STRIPE_PUBLISHABLE_KEY }}" \
+          "Stripe__SecretKey=${{ secrets.STRIPE_SECRET_KEY }}" \
+          "ExternalAuthentication__Facebook__AppId=${{ secrets.FACEBOOK_APP_ID }}" \
+          "ExternalAuthentication__Facebook__AppSecret=${{ secrets.FACEBOOK_APP_SECRET }}"
