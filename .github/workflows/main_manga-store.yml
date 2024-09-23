@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy ASP.Net Core app to Azure Web App - Manga-Store
 
 on:
@@ -40,7 +37,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write
 
     steps:
       - name: Download artifact from build job
@@ -51,9 +48,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_3FD02C4AF5B448338069B3933A78ED68 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_96DD4BD5E5584F4BB2CBEB75B8C8774A }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1C3F2168CA4B4C339D6562D9303408C0 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -61,4 +58,13 @@ jobs:
         with:
           app-name: 'Manga-Store'
           slot-name: 'Production'
-          package: .
+          package: ${{github.workspace}}/myapp
+
+      - name: Configure app settings for Azure Web App
+        run: |
+          az webapp config appsettings set --name Manga-Store --resource-group <your-resource-group> --settings \
+          ConnectionStrings__DefaultConnection="Server=tcp:manga-store.database.windows.net,1433;Initial Catalog=Manga;Persist Security Info=False;User ID=sqladmin;Password=${{ secrets.AZURE_SQL_PASSWORD }};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" \
+          Stripe__PublishableKey="${{ secrets.STRIPE_PUBLISHABLE_KEY }}" \
+          Stripe__SecretKey="${{ secrets.STRIPE_SECRET_KEY }}" \
+          ExternalAuthentication__Facebook__AppId="${{ secrets.FACEBOOK_APP_ID }}" \
+          ExternalAuthentication__Facebook__AppSecret="${{ secrets.FACEBOOK_APP_SECRET }}"
