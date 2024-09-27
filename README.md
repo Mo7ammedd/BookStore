@@ -19,7 +19,7 @@ Manga Store is a comprehensive online platform built with ASP.NET Core 8, follow
   - Bootstrap for responsive design
 - **Back-End**:  
   - C#
-  - ASP.NET Core 7 (MVC)
+  - ASP.NET Core 8 (MVC)
   - Entity Framework Core for database access
 - **Database**:  
   - Microsoft SQL Server
